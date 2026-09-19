@@ -14,7 +14,11 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { success: false, error: '서버에 GEMINI_API_KEY가 설정되어 있지 않습니다.' },
+        {
+          success: false,
+          error:
+            '서버에 GEMINI_API_KEY가 설정되어 있지 않습니다. Vercel 프로젝트 대시보드(Settings > Environment Variables)에 GEMINI_API_KEY를 등록해 주세요.',
+        },
         { status: 500 }
       );
     }
@@ -97,3 +101,4 @@ ${isJudgeContext ? '학생이 채점 후 오답이 발생하여 힌트와 원인
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
+
