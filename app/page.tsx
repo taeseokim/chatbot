@@ -8,6 +8,7 @@ import JudgeModal from '@/components/JudgeModal';
 import TeacherAuthModal from '@/components/TeacherAuthModal';
 import { Submission } from '@/lib/types';
 import { Sparkles, Code2, Award, Laptop } from 'lucide-react';
+import { runPythonInBrowser, runJudgeInBrowser } from '@/lib/pyodide';
 
 export default function StudentJudgePage() {
   const [code, setCode] = useState(DEFAULT_PYTHON_TEMPLATE);
@@ -45,33 +46,32 @@ export default function StudentJudgePage() {
     }
   }, [studentId, studentName, code]);
 
-  // 단일 실행 핸들러
+  // 단일 실행 핸들러 (브라우저 WebAssembly 파이썬으로 0.05초 만에 실행)
   const handleRunSingle = async (height: number, weight: number) => {
     setIsRunning(true);
-    setRunOutput('');
+    setRunOutput('🐍 파이썬 엔진 준비 중...');
     setRunError(undefined);
 
     try {
-      const res = await fetch('/api/run', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code, height, weight }),
+      const stdinText = `${height}\n${weight}\n`;
+      const res = await runPythonInBrowser(code, stdinText, (statusMsg) => {
+        setRunOutput(`⏳ ${statusMsg}`);
       });
-      const data = await res.json();
 
-      if (data.success) {
-        setRunOutput(data.output || '(출력된 내용이 없습니다)');
+      if (res.error) {
+        setRunError(res.stderr || res.error);
+        setRunOutput(res.stdout || '');
       } else {
-        setRunError(data.error || '실행 중 오류가 발생했습니다.');
+        setRunOutput(res.stdout || '(출력된 내용이 없습니다)');
       }
-    } catch {
-      setRunError('서버와의 통신 오류가 발생했습니다.');
+    } catch (err: any) {
+      setRunError(err?.message || '파이썬 실행 중 오류가 발생했습니다.');
     } finally {
       setIsRunning(false);
     }
   };
 
-  // 최종 채점 핸들러
+  // 최종 채점 핸들러 (브라우저 파이썬 채점 후 결과만 Supabase에 안전 저장)
   const handleSubmitJudge = async () => {
     if (!studentId.trim()) {
       alert('학번을 먼저 입력해주세요 (예: 20101)');
@@ -84,6 +84,10 @@ export default function StudentJudgePage() {
 
     setIsJudging(true);
     try {
+      // 1. 브라우저 WebAssembly 파이썬으로 5개 테스트케이스 채점
+      const clientJudgeResult = await runJudgeInBrowser(code);
+
+      // 2. 채점 결과와 학생 코드를 서버로 전송하여 Supabase DB에 영구 저장
       const res = await fetch('/api/judge', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -91,6 +95,7 @@ export default function StudentJudgePage() {
           studentId: studentId.trim(),
           studentName: studentName.trim(),
           code,
+          clientJudgeResult,
         }),
       });
       const data = await res.json();
@@ -99,10 +104,10 @@ export default function StudentJudgePage() {
         setLatestSubmission(data.submission);
         setIsJudgeModalOpen(true);
       } else {
-        alert(data.error || '채점 중 오류가 발생했습니다.');
+        alert(data.error || '채점 결과 저장 중 오류가 발생했습니다.');
       }
-    } catch {
-      alert('채점 서버와 연결할 수 없습니다.');
+    } catch (err: any) {
+      alert('채점 처리 중 오류가 발생했습니다: ' + (err?.message || '네트워크를 확인하세요.'));
     } finally {
       setIsJudging(false);
     }

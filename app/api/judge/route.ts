@@ -6,7 +6,7 @@ import { Submission } from '@/lib/types';
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { studentId, studentName, code } = body;
+    const { studentId, studentName, code, clientJudgeResult } = body;
 
     if (!studentId || !studentId.trim()) {
       return NextResponse.json({ success: false, error: '학번을 입력해주세요.' }, { status: 400 });
@@ -24,8 +24,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: securityCheck.reason }, { status: 400 });
     }
 
-    // 채점 실행
-    const judgeResult = await runJudge(code);
+    // 1. 브라우저 파이썬(Pyodide)에서 이미 채점된 결과가 넘어온 경우 -> Vercel spawn ENOENT 원천 방지
+    let judgeResult = clientJudgeResult;
+
+    // 2. 클라이언트 채점 결과가 없다면 서버 파이썬 실행 시도
+    if (!judgeResult) {
+      judgeResult = await runJudge(code);
+    }
 
     let status: 'PASS' | 'FAIL' | 'PARTIAL' = 'PARTIAL';
     if (judgeResult.passedCount === judgeResult.totalCount) {
@@ -64,4 +69,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-

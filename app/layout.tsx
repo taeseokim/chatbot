@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -27,7 +28,14 @@ export default function RootLayout({
       lang="ko"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#f5f5f7] dark:bg-black text-neutral-900 dark:text-neutral-100">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-[#f5f5f7] dark:bg-black text-neutral-900 dark:text-neutral-100">
+        <Script
+          id="pyodide-cdn"
+          src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"
+          strategy="afterInteractive"
+        />
+        {children}
+      </body>
     </html>
   );
 }

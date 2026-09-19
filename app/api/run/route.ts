@@ -30,6 +30,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(result);
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : '실행 중 오류가 발생했습니다.';
+    if (message.includes('ENOENT')) {
+      return NextResponse.json({
+        success: false,
+        error: '서버에 Python이 설치되어 있지 않습니다. 브라우저 파이썬 엔진으로 자동 전환됩니다.',
+      }, { status: 200 });
+    }
     return NextResponse.json({ success: false, error: message }, { status: 500 });
   }
 }
