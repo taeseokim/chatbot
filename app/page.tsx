@@ -6,6 +6,7 @@ import ProblemGuide from '@/components/ProblemGuide';
 import CodeEditor, { DEFAULT_PYTHON_TEMPLATE } from '@/components/CodeEditor';
 import JudgeModal from '@/components/JudgeModal';
 import TeacherAuthModal from '@/components/TeacherAuthModal';
+import AiTutorModal from '@/components/AiTutorModal';
 import { Submission } from '@/lib/types';
 import { Sparkles, Code2, Award, Laptop } from 'lucide-react';
 import { runPythonInBrowser, runJudgeInBrowser } from '@/lib/pyodide';
@@ -24,6 +25,12 @@ export default function StudentJudgePage() {
   const [isJudgeModalOpen, setIsJudgeModalOpen] = useState(false);
 
   const [isTeacherModalOpen, setIsTeacherModalOpen] = useState(false);
+
+  // AI 튜터 상태
+  const [isAiTutorOpen, setIsAiTutorOpen] = useState(false);
+  const [aiExplanation, setAiExplanation] = useState('');
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiErrorContext, setAiErrorContext] = useState<string | undefined>();
 
   // 로컬 스토리지에서 학번/이름 불러오기
   useEffect(() => {
@@ -113,6 +120,42 @@ export default function StudentJudgePage() {
     }
   };
 
+  // AI 코드 해석 & 피드백 요청 핸들러
+  const handleOpenAiTutor = async (errorMsg?: string) => {
+    if (!code || !code.trim()) {
+      alert('해석할 코드를 먼저 작성해 주세요.');
+      return;
+    }
+
+    setIsAiTutorOpen(true);
+    setIsAiLoading(true);
+    setAiExplanation('');
+    setAiErrorContext(errorMsg);
+
+    try {
+      const res = await fetch('/api/explain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          errorMsg,
+          context: errorMsg ? 'judge' : 'editor',
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success && data.explanation) {
+        setAiExplanation(data.explanation);
+      } else {
+        setAiExplanation(`⚠️ 오류: ${data.error || 'AI 해석을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'}`);
+      }
+    } catch (err: any) {
+      setAiExplanation('⚠️ 서버와 통신할 수 없습니다: ' + (err?.message || '네트워크를 확인하세요.'));
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f5f5f7] dark:bg-[#000000] text-neutral-900 dark:text-neutral-100 flex flex-col font-sans selection:bg-[#0071e3]/20">
       {/* 1. 애플 스타일 상단 글로벌 내비게이션 바 */}
@@ -169,6 +212,7 @@ export default function StudentJudgePage() {
               isJudging={isJudging}
               runOutput={runOutput}
               runError={runError}
+              onOpenAiTutor={() => handleOpenAiTutor()}
             />
           </div>
         </div>
@@ -179,9 +223,20 @@ export default function StudentJudgePage() {
         isOpen={isJudgeModalOpen}
         onClose={() => setIsJudgeModalOpen(false)}
         submission={latestSubmission}
+        onOpenAiTutor={(errSummary) => handleOpenAiTutor(errSummary)}
       />
 
-      {/* 5. 교사 인증 모달 */}
+      {/* 5. AI 파이썬 코드 해석 튜터 모달 */}
+      <AiTutorModal
+        isOpen={isAiTutorOpen}
+        onClose={() => setIsAiTutorOpen(false)}
+        code={code}
+        explanation={aiExplanation}
+        loading={isAiLoading}
+        onRetry={() => handleOpenAiTutor(aiErrorContext)}
+      />
+
+      {/* 6. 교사 인증 모달 */}
       <TeacherAuthModal
         isOpen={isTeacherModalOpen}
         onClose={() => setIsTeacherModalOpen(false)}

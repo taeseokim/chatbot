@@ -9,9 +9,10 @@ interface JudgeModalProps {
   isOpen: boolean;
   onClose: () => void;
   submission: Submission | null;
+  onOpenAiTutor?: (errorSummary?: string) => void;
 }
 
-export default function JudgeModal({ isOpen, onClose, submission }: JudgeModalProps) {
+export default function JudgeModal({ isOpen, onClose, submission, onOpenAiTutor }: JudgeModalProps) {
   useEffect(() => {
     if (isOpen && submission && submission.score === 100) {
       // 100점 만점일 경우 애플 스타일 축하 폭죽 발사!
@@ -156,7 +157,31 @@ export default function JudgeModal({ isOpen, onClose, submission }: JudgeModalPr
         </div>
 
         {/* 하단 확인 버튼 바 */}
-        <div className="p-4 sm:p-5 bg-neutral-50 dark:bg-[#141416] border-t border-neutral-200 dark:border-neutral-800 flex justify-end space-x-2">
+        <div className="p-4 sm:p-5 bg-neutral-50 dark:bg-[#141416] border-t border-neutral-200 dark:border-neutral-800 flex items-center justify-between">
+          {onOpenAiTutor ? (
+            <button
+              type="button"
+              onClick={() => {
+                const failedTests = submission.results
+                  .filter((r) => !r.passed)
+                  .map(
+                    (r) =>
+                      `[${r.title}] 기대 판정: '${r.expectedCategory}', 학생 출력 판정: '${r.detectedCategory || "출력없음"}', 피드백: ${r.error || "오답"}`
+                  )
+                  .join('\n');
+                onOpenAiTutor(
+                  failedTests || '모든 테스트를 통과했습니다! 코드의 우수한 점과 추가 개선점에 대해 설명해 주세요.'
+                );
+              }}
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-[#5856d6] hover:from-purple-500 hover:to-[#6866e6] active:scale-95 text-white text-xs sm:text-sm font-semibold flex items-center space-x-1.5 transition-all shadow-md shadow-purple-600/30 cursor-pointer"
+            >
+              <Sparkles className="w-4 h-4" />
+              <span>AI 채점 분석 & 힌트</span>
+            </button>
+          ) : (
+            <div />
+          )}
+
           <button
             type="button"
             onClick={onClose}

@@ -158,3 +158,4 @@ export function formatErrorMessage(stderr: string): string {
   }
   return stderr.split('\n').filter((l) => l.trim()).slice(-2).join(' ') || '실행 오류가 발생했습니다.';
 }
+

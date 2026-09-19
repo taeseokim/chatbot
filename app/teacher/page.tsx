@@ -23,8 +23,10 @@ import {
   Lock,
   Copy,
   Check,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Bot
 } from 'lucide-react';
+import AiTutorModal from '@/components/AiTutorModal';
 
 function TeacherDashboardContent() {
   const searchParams = useSearchParams();
@@ -52,6 +54,13 @@ function TeacherDashboardContent() {
   // 모달 상태
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [copied, setCopied] = useState(false);
+
+  // AI 코드 해석 모달 상태
+  const [isAiTutorOpen, setIsAiTutorOpen] = useState(false);
+  const [aiExplanation, setAiExplanation] = useState('');
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiCurrentCode, setAiCurrentCode] = useState('');
+  const [aiCurrentError, setAiCurrentError] = useState<string | undefined>();
 
   // 초기 인증 확인
   useEffect(() => {
@@ -244,6 +253,46 @@ function TeacherDashboardContent() {
     navigator.clipboard.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  // 교사용 AI 코드 해석 및 채점 분석 핸들러
+  const handleTeacherAiExplain = async (sub: Submission) => {
+    setAiCurrentCode(sub.code);
+    const failedTests = sub.results
+      ?.filter((r) => !r.passed)
+      .map(
+        (r) =>
+          `[${r.title}] 기대: ${r.expectedCategory}, 학생 판정: ${r.detectedCategory || '미감지'}, 피드백: ${r.error || '오답'}`
+      )
+      .join('\n');
+    setAiCurrentError(failedTests);
+
+    setIsAiTutorOpen(true);
+    setIsAiLoading(true);
+    setAiExplanation('');
+
+    try {
+      const res = await fetch('/api/explain', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code: sub.code,
+          errorMsg: failedTests,
+          context: 'judge',
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success && data.explanation) {
+        setAiExplanation(data.explanation);
+      } else {
+        setAiExplanation(`⚠️ 오류: ${data.error || 'AI 해석을 불러오지 못했습니다.'}`);
+      }
+    } catch (err: any) {
+      setAiExplanation('⚠️ 서버와 통신할 수 없습니다: ' + (err?.message || ''));
+    } finally {
+      setIsAiLoading(false);
+    }
   };
 
   // 필터링 및 정렬
@@ -608,6 +657,15 @@ function TeacherDashboardContent() {
               <div className="flex items-center space-x-2">
                 <button
                   type="button"
+                  onClick={() => handleTeacherAiExplain(selectedSubmission)}
+                  className="px-2.5 py-1 rounded-lg bg-gradient-to-r from-purple-600 to-[#5856d6] hover:from-purple-500 text-xs font-medium text-white flex items-center space-x-1 shadow-sm transition-all"
+                  title="Google Gemini AI로 학생 코드 및 채점 결과를 자동 분석합니다"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>AI 분석</span>
+                </button>
+                <button
+                  type="button"
                   onClick={() => downloadSingleStudentPy(selectedSubmission)}
                   className="px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 flex items-center space-x-1"
                   title="학생이 제출한 파이썬 소스 코드(.py) 파일 다운로드"
@@ -709,6 +767,18 @@ function TeacherDashboardContent() {
           </div>
         </div>
       )}
+
+      {/* AI 파이썬 코드 해석 튜터 모달 */}
+      <AiTutorModal
+        isOpen={isAiTutorOpen}
+        onClose={() => setIsAiTutorOpen(false)}
+        code={aiCurrentCode}
+        explanation={aiExplanation}
+        loading={isAiLoading}
+        onRetry={() => {
+          if (selectedSubmission) handleTeacherAiExplain(selectedSubmission);
+        }}
+      />
     </div>
   );
 }

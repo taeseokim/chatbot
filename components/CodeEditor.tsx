@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { Play, Send, RotateCcw, User, Hash, Terminal as TerminalIcon, Sparkles } from 'lucide-react';
+import { Play, Send, RotateCcw, User, Hash, Terminal as TerminalIcon, Sparkles, Bot } from 'lucide-react';
 
 interface CodeEditorProps {
   code: string;
@@ -16,6 +16,7 @@ interface CodeEditorProps {
   isJudging: boolean;
   runOutput: string;
   runError?: string;
+  onOpenAiTutor?: () => void;
 }
 
 const DEFAULT_PYTHON_TEMPLATE = `# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가
@@ -57,6 +58,7 @@ export default function CodeEditor({
   isJudging,
   runOutput,
   runError,
+  onOpenAiTutor,
 }: CodeEditorProps) {
   const [testHeight, setTestHeight] = useState('175');
   const [testWeight, setTestWeight] = useState('72');
@@ -165,6 +167,18 @@ export default function CodeEditor({
             />
           </div>
 
+          {onOpenAiTutor && (
+            <button
+              type="button"
+              onClick={onOpenAiTutor}
+              title="AI 코드 해석기 열기"
+              className="px-2 py-1 text-purple-400 hover:text-white rounded-lg hover:bg-purple-900/40 border border-purple-500/30 transition-colors text-xs flex items-center space-x-1"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <span className="hidden sm:inline">AI 튜터</span>
+            </button>
+          )}
+
           <button
             type="button"
             onClick={handleReset}
@@ -234,6 +248,18 @@ export default function CodeEditor({
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>{isRunning ? '실행 중...' : '코드 실행'}</span>
             </button>
+
+            {onOpenAiTutor && (
+              <button
+                type="button"
+                onClick={onOpenAiTutor}
+                className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-[#5856d6] hover:from-purple-500 hover:to-[#6866e6] active:scale-95 text-white font-medium text-xs flex items-center space-x-1.5 transition-all cursor-pointer shadow-sm shadow-purple-600/30"
+                title="Google Gemini AI가 작성한 파이썬 코드를 알기 쉽게 한국어로 번역/해설해 드립니다."
+              >
+                <Bot className="w-3.5 h-3.5" />
+                <span>AI 코드 해석</span>
+              </button>
+            )}
           </div>
 
           {/* 최종 채점 및 제출 버튼 (애플 블루 버튼) */}
