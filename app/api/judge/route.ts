@@ -48,8 +48,8 @@ export async function POST(req: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    // 로컬 데이터베이스 저장
-    saveSubmission(submission);
+    // 데이터베이스 저장 (Supabase 또는 로컬 폴백)
+    await saveSubmission(submission);
 
     return NextResponse.json({
       success: true,

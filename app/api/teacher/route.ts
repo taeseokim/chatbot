@@ -12,10 +12,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ success: false, error: '교사 인증 비밀번호가 올바르지 않습니다.' }, { status: 401 });
     }
 
-    let submissions = getAllSubmissions();
+    let submissions = await getAllSubmissions();
     // 만약 데이터가 아예 비어있으면 보기 좋게 샘플 데이터 3건을 자동 시딩
     if (submissions.length === 0) {
-      submissions = seedSampleSubmissions();
+      submissions = await seedSampleSubmissions();
     }
 
     // 통계 계산
@@ -66,12 +66,12 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === 'seed') {
-      const seeded = seedSampleSubmissions();
+      const seeded = await seedSampleSubmissions();
       return NextResponse.json({ success: true, message: '샘플 데이터가 생성되었습니다.', submissions: seeded });
     }
 
     if (action === 'reset') {
-      resetSubmissions();
+      await resetSubmissions();
       return NextResponse.json({ success: true, message: '모든 제출 기록이 초기화되었습니다.', submissions: [] });
     }
 
@@ -79,8 +79,8 @@ export async function POST(req: NextRequest) {
       if (!submissionId) {
         return NextResponse.json({ success: false, error: '삭제할 제출 ID가 필요합니다.' }, { status: 400 });
       }
-      deleteSubmission(submissionId);
-      const updated = getAllSubmissions();
+      await deleteSubmission(submissionId);
+      const updated = await getAllSubmissions();
       return NextResponse.json({ success: true, message: '삭제되었습니다.', submissions: updated });
     }
 

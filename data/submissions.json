@@ -1,5 +1,1134 @@
 [
   {
+    "id": "sub_1789803121432_f5s9q",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 67,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 57,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 51,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 51,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 55,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:32:01.432Z"
+  },
+  {
+    "id": "sub_1789803101303_mrkla",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 56,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 53,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 47,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 64,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 55,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:31:41.304Z"
+  },
+  {
+    "id": "sub_1789803000621_1sxqu",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 72,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 71,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 70,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 66,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 62,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:30:00.621Z"
+  },
+  {
+    "id": "sub_1789802554192_u4la1",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 60,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 55,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 50,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 48,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 49,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:22:34.192Z"
+  },
+  {
+    "id": "sub_1789802541451_a1kdu",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\n\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 0,
+    "totalScore": 100,
+    "passedCount": 0,
+    "totalCount": 5,
+    "status": "FAIL",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 108,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 83,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 85,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 82,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": false,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 81,
+        "score": 0,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:22:21.451Z"
+  },
+  {
+    "id": "sub_1789802494982_t2wmq",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n \n    print(\"비만\")\n",
+    "score": 40,
+    "totalScore": 100,
+    "passedCount": 2,
+    "totalCount": 5,
+    "status": "PARTIAL",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 59,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 56,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "비만",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n비만",
+        "error": "기대 판정: '과체중', 학생 판정: '비만'",
+        "executionTimeMs": 51,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 51,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": false,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 53,
+        "score": 0,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:21:34.982Z"
+  },
+  {
+    "id": "sub_1789802484833_528ve",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 70,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 42,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 61,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 65,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 64,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:21:24.833Z"
+  },
+  {
+    "id": "sub_1789802408839_nbxy2",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 56,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 55,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 49,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 51,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 50,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:20:08.839Z"
+  },
+  {
+    "id": "sub_1789802397500_j9lfb",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = input(\"키(cm)를 입력하세요: \")\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 0,
+    "totalScore": 100,
+    "passedCount": 0,
+    "totalCount": 5,
+    "status": "FAIL",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 90,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 77,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 78,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 81,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": false,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 84,
+        "score": 0,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:19:57.500Z"
+  },
+  {
+    "id": "sub_1789802378698_mbo4a",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = input(\"키(cm)를 입력하세요: \")\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 0,
+    "totalScore": 100,
+    "passedCount": 0,
+    "totalCount": 5,
+    "status": "FAIL",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 110,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 94,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 83,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 82,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": false,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요:",
+        "error": "출력문에서 판정 결과(저체중, 정상, 과체중, 비만)를 찾을 수 없습니다.",
+        "executionTimeMs": 76,
+        "score": 0,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:19:38.698Z"
+  },
+  {
+    "id": "sub_1789802346736_m8cny",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    \nelse:\n    print(\"비만\")\n",
+    "score": 0,
+    "totalScore": 100,
+    "passedCount": 0,
+    "totalCount": 5,
+    "status": "FAIL",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "",
+        "error": "들여쓰기 오류 (IndentationError): if, elif, else 아래 코드의 들여쓰기(스페이스 4칸 또는 탭)를 확인하세요.\n  File \"<string>\", line 23\r\n    else:\r\n    ^^^^\r\nIndentationError: expected an indented block after 'elif' statement on line 21\r\n",
+        "executionTimeMs": 964,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "",
+        "error": "들여쓰기 오류 (IndentationError): if, elif, else 아래 코드의 들여쓰기(스페이스 4칸 또는 탭)를 확인하세요.\n  File \"<string>\", line 23\r\n    else:\r\n    ^^^^\r\nIndentationError: expected an indented block after 'elif' statement on line 21\r\n",
+        "executionTimeMs": 304,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "",
+        "error": "들여쓰기 오류 (IndentationError): if, elif, else 아래 코드의 들여쓰기(스페이스 4칸 또는 탭)를 확인하세요.\n  File \"<string>\", line 23\r\n    else:\r\n    ^^^^\r\nIndentationError: expected an indented block after 'elif' statement on line 21\r\n",
+        "executionTimeMs": 91,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": false,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "",
+        "error": "들여쓰기 오류 (IndentationError): if, elif, else 아래 코드의 들여쓰기(스페이스 4칸 또는 탭)를 확인하세요.\n  File \"<string>\", line 23\r\n    else:\r\n    ^^^^\r\nIndentationError: expected an indented block after 'elif' statement on line 21\r\n",
+        "executionTimeMs": 80,
+        "score": 0,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": false,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "",
+        "error": "들여쓰기 오류 (IndentationError): if, elif, else 아래 코드의 들여쓰기(스페이스 4칸 또는 탭)를 확인하세요.\n  File \"<string>\", line 23\r\n    else:\r\n    ^^^^\r\nIndentationError: expected an indented block after 'elif' statement on line 21\r\n",
+        "executionTimeMs": 72,
+        "score": 0,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:19:06.736Z"
+  },
+  {
+    "id": "sub_1789802329130_oc413",
+    "studentId": "20325",
+    "studentName": "김태서",
+    "code": "# [인덕과학기술고등학교] 2학년 정보 파이썬 수행평가\n# 문제: 키(cm)와 몸무게(kg)를 입력받아 BMI를 계산하고 4단계를 판정하세요.\n\n# 1. 키와 몸무게 입력 (단위: cm, kg)\nheight = float(input(\"키(cm)를 입력하세요: \"))\nweight = float(input(\"몸무게(kg)를 입력하세요: \"))\n\n# 2. 키(cm)를 미터(m)로 변환하여 BMI 계산\nheight_m = height / 100\nbmi = weight / (height_m * height_m)\n\n# 3. 계산된 BMI 출력\nprint(f\"당신의 BMI는 {bmi:.2f}입니다.\")\n\n# 4. 조건문(if-elif-else)을 이용한 4단계 판정\n# (저체중, 정상체중, 과체중, 비만)\nif bmi < 18.5:\n    print(\"저체중\")\nelif bmi < 23.0:\n    print(\"정상체중\")\nelif bmi < 25.0:\n    print(\"과체중\")\nelse:\n    print(\"비만\")\n",
+    "score": 100,
+    "totalScore": 100,
+    "passedCount": 5,
+    "totalCount": 5,
+    "status": "PASS",
+    "results": [
+      {
+        "testCaseId": 1,
+        "title": "테스트 1: 저체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 170,
+          "weight": 48
+        },
+        "expectedCategory": "저체중",
+        "detectedCategory": "저체중",
+        "expectedBmi": 16.61,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 16.61입니다.\r\n저체중",
+        "executionTimeMs": 110,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 2,
+        "title": "테스트 2: 정상체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 160,
+          "weight": 52
+        },
+        "expectedCategory": "정상체중",
+        "detectedCategory": "정상체중",
+        "expectedBmi": 20.31,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 20.31입니다.\r\n정상체중",
+        "executionTimeMs": 63,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 3,
+        "title": "테스트 3: 과체중 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 175,
+          "weight": 72
+        },
+        "expectedCategory": "과체중",
+        "detectedCategory": "과체중",
+        "expectedBmi": 23.51,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 23.51입니다.\r\n과체중",
+        "executionTimeMs": 60,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 4,
+        "title": "테스트 4: 비만 판정 케이스",
+        "passed": true,
+        "input": {
+          "height": 180,
+          "weight": 85
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 26.23,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 26.23입니다.\r\n비만",
+        "executionTimeMs": 52,
+        "score": 20,
+        "maxScore": 20
+      },
+      {
+        "testCaseId": 5,
+        "title": "테스트 5: 경계값 정밀 검증 (비만 경계 25.0)",
+        "passed": true,
+        "input": {
+          "height": 150,
+          "weight": 56.25
+        },
+        "expectedCategory": "비만",
+        "detectedCategory": "비만",
+        "expectedBmi": 25,
+        "actualOutput": "키(cm)를 입력하세요: 몸무게(kg)를 입력하세요: 당신의 BMI는 25.00입니다.\r\n비만",
+        "executionTimeMs": 62,
+        "score": 20,
+        "maxScore": 20
+      }
+    ],
+    "createdAt": "2026-09-19T07:18:49.130Z"
+  },
+  {
     "id": "sub_induk_001",
     "studentId": "20101",
     "studentName": "김민준",

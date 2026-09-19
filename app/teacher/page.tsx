@@ -22,7 +22,8 @@ import {
   ArrowUpDown,
   Lock,
   Copy,
-  Check
+  Check,
+  FileSpreadsheet
 } from 'lucide-react';
 
 function TeacherDashboardContent() {
@@ -127,35 +128,115 @@ function TeacherDashboardContent() {
     }
   };
 
-  // CSV 다운로드 (나이스 NEIS 성적 입력용)
-  const downloadCsv = () => {
+  // CSV 이스케이프 함수 (엑셀 호환 및 개행, 쌍따옴표, 쉼표 보존)
+  const escapeCsv = (val: unknown): string => {
+    if (val === null || val === undefined) return '""';
+    const str = String(val);
+    return `"${str.replace(/"/g, '""')}"`;
+  };
+
+  // 1. 학생 입력 전체 정보 CSV 다운로드 (학번, 이름, 점수, 5개 테스트케이스 결과, 학생 작성 소스코드 원본 포함)
+  const downloadFullStudentCsv = () => {
     if (submissions.length === 0) {
-      alert('내보낼 데이터가 없습니다.');
+      alert('내보낼 학생 제출 데이터가 없습니다.');
       return;
     }
 
-    const headers = ['학번', '이름', '점수', '만점', '통과테스트수', '총테스트수', '상태', '제출일시'];
-    const rows = submissions.map((s) => [
-      s.studentId,
-      s.studentName,
-      s.score,
-      s.totalScore,
-      s.passedCount,
-      s.totalCount,
-      s.status,
-      new Date(s.createdAt).toLocaleString('ko-KR'),
-    ]);
+    const headers = [
+      '학번',
+      '이름',
+      '획득점수',
+      '만점기준',
+      '통과테스트수',
+      '총테스트수',
+      '판정상태',
+      '테스트1_저체중',
+      '테스트2_정상체중',
+      '테스트3_과체중',
+      '테스트4_비만',
+      '테스트5_경계값25.0',
+      '학생_작성_파이썬코드',
+      '제출일시',
+    ];
 
-    // 한글 깨짐 방지를 위한 UTF-8 BOM 추가 (\uFEFF)
-    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map((e) => e.join(','))].join('\n');
+    const rows = submissions.map((s) => {
+      const getCaseSummary = (id: number) => {
+        const res = s.results?.find((r) => r.testCaseId === id);
+        if (!res) return '미응시';
+        return res.passed ? '통과(PASS)' : `오답(기대: ${res.expectedCategory}, 감지: ${res.detectedCategory || '미감지'})`;
+      };
+
+      return [
+        escapeCsv(s.studentId),
+        escapeCsv(s.studentName),
+        escapeCsv(s.score),
+        escapeCsv(s.totalScore),
+        escapeCsv(s.passedCount),
+        escapeCsv(s.totalCount),
+        escapeCsv(s.status === 'PASS' ? '만점통과' : s.status === 'PARTIAL' ? '부분점수' : '오답'),
+        escapeCsv(getCaseSummary(1)),
+        escapeCsv(getCaseSummary(2)),
+        escapeCsv(getCaseSummary(3)),
+        escapeCsv(getCaseSummary(4)),
+        escapeCsv(getCaseSummary(5)),
+        escapeCsv(s.code), // 학생이 에디터에 직접 입력한 파이썬 소스 코드 원본
+        escapeCsv(new Date(s.createdAt).toLocaleString('ko-KR')),
+      ].join(',');
+    });
+
+    const csvContent = '\uFEFF' + [headers.map(escapeCsv).join(','), ...rows].join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.setAttribute('href', url);
-    link.setAttribute('download', `인덕과기고_2학년_파이썬수행평가_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute('download', `인덕과기고_2학년_학생입력정보_전체_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // 2. 나이스 (NEIS) 입력용 간편 성적 CSV 다운로드
+  const downloadSimpleCsv = () => {
+    if (submissions.length === 0) {
+      alert('내보낼 학생 데이터가 없습니다.');
+      return;
+    }
+
+    const headers = ['학번', '이름', '점수', '만점', '통과테스트수', '상태', '제출일시'];
+    const rows = submissions.map((s) => [
+      escapeCsv(s.studentId),
+      escapeCsv(s.studentName),
+      escapeCsv(s.score),
+      escapeCsv(s.totalScore),
+      escapeCsv(`${s.passedCount}/${s.totalCount}`),
+      escapeCsv(s.status),
+      escapeCsv(new Date(s.createdAt).toLocaleString('ko-KR')),
+    ].join(','));
+
+    const csvContent = '\uFEFF' + [headers.map(escapeCsv).join(','), ...rows].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `인덕과기고_2학년_나이스성적표_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // 3. 개별 학생의 파이썬 파일(.py) 다운로드
+  const downloadSingleStudentPy = (sub: Submission) => {
+    const blob = new Blob([sub.code], { type: 'text/x-python;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.setAttribute('href', url);
+    link.setAttribute('download', `${sub.studentId}_${sub.studentName}_bmi.py`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   // 코드 클립보드 복사
@@ -261,14 +342,25 @@ function TeacherDashboardContent() {
             </p>
           </div>
 
-          <div className="flex items-center space-x-2 self-start sm:self-auto">
+          <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
             <button
               type="button"
-              onClick={downloadCsv}
+              onClick={downloadFullStudentCsv}
               className="px-3.5 py-2 rounded-xl bg-[#0071e3] hover:bg-[#0077ed] text-white text-xs font-semibold flex items-center space-x-1.5 shadow-md shadow-[#0071e3]/20 transition-all cursor-pointer active:scale-95"
+              title="학번, 이름, 점수, 테스트케이스별 결과, 학생 작성 소스코드 전체 포함"
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>나이스 성적 CSV 다운로드</span>
+              <FileSpreadsheet className="w-3.5 h-3.5" />
+              <span>학생 입력정보 CSV 다운로드</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={downloadSimpleCsv}
+              className="px-3 py-2 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors flex items-center space-x-1 cursor-pointer"
+              title="나이스(NEIS) 성적 입력용 간편 CSV"
+            >
+              <Download className="w-3.5 h-3.5 text-neutral-500" />
+              <span className="hidden md:inline">나이스 성적표</span>
             </button>
 
             <button
@@ -514,6 +606,15 @@ function TeacherDashboardContent() {
               </div>
 
               <div className="flex items-center space-x-2">
+                <button
+                  type="button"
+                  onClick={() => downloadSingleStudentPy(selectedSubmission)}
+                  className="px-2.5 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-xs font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-200 flex items-center space-x-1"
+                  title="학생이 제출한 파이썬 소스 코드(.py) 파일 다운로드"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>.py 다운로드</span>
+                </button>
                 <button
                   type="button"
                   onClick={() => handleCopyCode(selectedSubmission.code)}
